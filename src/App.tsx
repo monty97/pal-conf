@@ -534,7 +534,35 @@ function App() {
               <div className="leading-10">
                 <Trans i18nKey={I18nStr.title} />
               </div>
-              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="ml-auto h-10" variant="secondary">
+                    <Languages />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup
+                    value={locale}
+                    onValueChange={(value) => {
+                      i18n
+                        .changeLanguage(value)
+                        .then(() => {
+                          // console.log("Language changed to " + value)
+                        })
+                        .catch((e) => {
+                          console.error(e);
+                        });
+                      setLocale(value);
+                    }}
+                  >
+                    <DropdownMenuRadioItem value="en_US">
+                      <ReactCountryFlag countryCode="US" svg />
+                      <div className="px-2"> English </div>
+                    </DropdownMenuRadioItem>
+                    
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </CardTitle>
             <CardDescription>
               <Trans i18nKey={I18nStr.introduction} />
